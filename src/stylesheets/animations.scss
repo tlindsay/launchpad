@@ -1,0 +1,74 @@
+@import 'variables';
+
+@keyframes rotate {
+  0% { transform: rotateZ(0deg); transform-origin:center center; }
+  100% { transform: rotateZ(360deg); transform-origin:center center; }
+}
+
+@keyframes rotateHue {
+  0%   { color: $r; }
+  9%   { color: $o; }
+  26%  { color: $y; }
+  43%  { color: $g; }
+  60%  { color: $b; }
+  77%  { color: $i; }
+  94%  { color: $v; }
+  100% { color: $r; }
+}
+
+@keyframes rotateBackgroundHue {
+  0%   { background-color: $r; }
+  9%   { background-color: $o; }
+  26%  { background-color: $y; }
+  43%  { background-color: $g; }
+  60%  { background-color: $b; }
+  77%  { background-color: $i; }
+  94%  { background-color: $v; }
+  100% { background-color: $r; }
+}
+
+@keyframes rotateBorderHue {
+  0%   { border-color: $r; }
+  9%   { border-color: $o; }
+  26%  { border-color: $y; }
+  43%  { border-color: $g; }
+  60%  { border-color: $b; }
+  77%  { border-color: $i; }
+  94%  { border-color: $v; }
+  100% { border-color: $r; }
+}
+
+@keyframes rotateStrokeHue { 
+  0%   { stroke: $r; }
+  9%   { stroke: $o; }
+  26%  { stroke: $y; }
+  43%  { stroke: $g; }
+  60%  { stroke: $b; }
+  77%  { stroke: $i; }
+  94%  { stroke: $v; }
+  100% { stroke: $r; }
+}
+
+@keyframes rotateFillHue {
+  0%   { fill: $r; }
+  9%   { fill: $o; }
+  26%  { fill: $y; }
+  43%  { fill: $g; }
+  60%  { fill: $b; }
+  77%  { fill: $i; }
+  94%  { fill: $v; }
+  100% { fill: $r; }
+}
+
+@keyframes shake {
+  0%, 100%  { transform: translateX(0px);   }
+  20%, 60%  { transform: translateX(20px);  }
+  40%, 80%  { transform: translateX(-20px); }
+}
+
+@keyframes drawCircle {
+  0% {stroke-dashoffset: 1474; }
+  100% { stroke-dashoffset: -1474; }
+}
+
+.shake { animation: shake .75s ease-in-out}

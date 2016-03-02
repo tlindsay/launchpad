@@ -1,0 +1,16 @@
+{
+  "name": "Pat's New Tab",
+  "description": "Override the new tab page",
+  "version": "0.1",
+  "incognito": "split",
+  "permissions":[
+    "geolocation",
+    "system.memory",
+    "https://api.forecast.io/*",
+    "https://cdn.jsdelivr.net/*"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "dist/new.html"
+  },
+  "manifest_version": 2
+}
