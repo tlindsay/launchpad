@@ -1,4 +1,4 @@
-var apis, coords, getWeatherIcon, intersection, located,
+var apis, coords, getWeatherIcon, intersection, located, promise, theUltimateAnswer,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 apis = {
@@ -16,25 +16,8 @@ coords = {};
 
 located = false;
 
-this.iPromise = (function(_this) {
-  return function() {
-    var resolver;
-    resolver = function() {
-      return console.log('hit the resolver');
-    };
-    return new Promise(resolver)(function() {
-      return setTimeout((function() {
-        return alert("promise fulfilled");
-      }), 5000);
-    });
-  };
-})(this);
-
-this.resolver = function() {
-  return console.log('resolved');
-};
-
 this.initWeather = function() {
+  console.info('getting weather');
   return navigator.geolocation.getCurrentPosition(function(p) {
     var f, req;
     f = apis.forecast;
@@ -55,6 +38,7 @@ this.initWeather = function() {
 };
 
 this.initMemory = function() {
+  console.info('getting available memory');
   return chrome.system.memory.getInfo(function(info) {
     return console.log("" + (info.availableCapacity / Math.pow(10, 9)) + "/" + (info.capacity / Math.pow(10, 9)) + " available");
   });
@@ -65,7 +49,7 @@ getWeatherIcon = function(icon) {
   conditions = icon.split('-');
   uri = [];
   svg = '';
-  if (intersection(['cloudy', 'rain', 'wind', 'fog', 'snow', 'hail', 'sleet'], conditions).length) {
+  if (intersect(['cloudy', 'rain', 'wind', 'fog', 'snow', 'hail', 'sleet'], conditions)) {
     uri.push('Cloud');
   }
   if (__indexOf.call(conditions, 'rain') >= 0) {
@@ -77,7 +61,7 @@ getWeatherIcon = function(icon) {
   if (__indexOf.call(conditions, 'snow') >= 0) {
     uri.push('Snow');
   }
-  if (intersection(['hail', 'sleet'], conditions).length) {
+  if (intersect(['hail', 'sleet'], conditions)) {
     uri.push('Hail');
   }
   if (__indexOf.call(conditions, 'wind') >= 0) {
@@ -89,7 +73,7 @@ getWeatherIcon = function(icon) {
   if (__indexOf.call(conditions, 'day') >= 0) {
     uri.push('Sun');
   }
-  if (intersection(['rain', 'hail', 'sleet', 'snow'], conditions).length) {
+  if (intersect(['rain', 'hail', 'sleet', 'snow'], conditions)) {
     uri.push('Alt');
   }
   req = new XMLHttpRequest();
@@ -102,13 +86,13 @@ getWeatherIcon = function(icon) {
 };
 
 intersection = function(a, b) {
-  var value, _i, _len, _ref, _results;
+  var vlue, _i, _len, _ref, _results;
   if (a.length > b.length) {
     _ref = [b, a], a = _ref[0], b = _ref[1];
   }
   _results = [];
   for (_i = 0, _len = a.length; _i < _len; _i++) {
-    value = a[_i];
+    vlue = a[_i];
     if (__indexOf.call(b, value) >= 0) {
       _results.push(value);
     }
@@ -120,4 +104,18 @@ this.initWeather();
 
 this.initMemory();
 
-window.promise = this.iPromise();
+theUltimateAnswer = function() {
+  return new Promise(function(resolve) {
+    return setTimeout((function() {
+      var value;
+      value = 42;
+      return resolve(value);
+    }), 3000);
+  });
+};
+
+promise = theUltimateAnswer();
+
+promise.then(function(result) {
+  return alert(result);
+});
