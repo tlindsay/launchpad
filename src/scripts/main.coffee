@@ -2,9 +2,20 @@ apis =
   forecast:
     endpoint: "https://api.forecast.io/forecast"
     key: 'aaa93803cd15d3b0cc3eec06e0e20018'
+  nasa:
+    endpoint: 'https://api.nasa.gov/planetary/apod'
+    key: 'oi5Qw99OwyRKa43TPEquG2kbdKCd0eifOT5sA4uk'
 
 coords = {}
 located = false
+
+# Promise test
+@iPromise = () =>
+  resolver = () -> console.log 'hit the resolver'
+  return new Promise(resolver) =>
+    setTimeout (() -> alert "promise fulfilled"), 5000
+
+@resolver = () -> console.log 'resolved'
 
 # Get dat weather
 @initWeather = () ->
@@ -61,3 +72,4 @@ intersection = (a, b) ->
 
 @initWeather()
 @initMemory()
+window.promise = @iPromise()

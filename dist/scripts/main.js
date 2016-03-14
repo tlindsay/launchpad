@@ -5,12 +5,34 @@ apis = {
   forecast: {
     endpoint: "https://api.forecast.io/forecast",
     key: 'aaa93803cd15d3b0cc3eec06e0e20018'
+  },
+  nasa: {
+    endpoint: 'https://api.nasa.gov/planetary/apod',
+    key: 'oi5Qw99OwyRKa43TPEquG2kbdKCd0eifOT5sA4uk'
   }
 };
 
 coords = {};
 
 located = false;
+
+this.iPromise = (function(_this) {
+  return function() {
+    var resolver;
+    resolver = function() {
+      return console.log('hit the resolver');
+    };
+    return new Promise(resolver)(function() {
+      return setTimeout((function() {
+        return alert("promise fulfilled");
+      }), 5000);
+    });
+  };
+})(this);
+
+this.resolver = function() {
+  return console.log('resolved');
+};
 
 this.initWeather = function() {
   return navigator.geolocation.getCurrentPosition(function(p) {
@@ -97,3 +119,5 @@ intersection = function(a, b) {
 this.initWeather();
 
 this.initMemory();
+
+window.promise = this.iPromise();
