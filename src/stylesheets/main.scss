@@ -8,8 +8,10 @@ body {
   @include fantasque;
 
   display:flex;
-  align-items: baseline;
-  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
   padding-top: 5em;
 
   div { 
@@ -19,14 +21,20 @@ body {
   }
 
   .card {
-    max-width: 10em;
-    margin: 0 auto;
+    width: 11em;
+    height: 11em;
+    margin: 0 1em;
     padding: .5em;
-
-    flex-basis: 360px;
 
     background: #fefefe;
     box-shadow: 0 0 10px $lg;
+
+    &.loading {
+      color: $lg;
+      animation: none;
+      font-size: 1em;
+      min-width: 30em;
+    }
   }
 
   .weather {
@@ -37,12 +45,9 @@ body {
       width: 2em;
       height: 2em;
     }
+  }
 
-    &.loading {
-      color: $lg;
-      animation: none;
-      font-size: 1em;
-      min-width: 30em;
-    }
+  .mars {
+    img { max-width: 100%; }
   }
 }

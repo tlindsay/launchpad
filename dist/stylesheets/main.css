@@ -169,8 +169,10 @@ body {
   font-weight: normal;
   font-style: normal;
   display: flex;
-  align-items: baseline;
-  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
   padding-top: 5em;
 }
 body div {
@@ -179,12 +181,18 @@ body div {
   font-size: 3em;
 }
 body .card {
-  max-width: 10em;
-  margin: 0 auto;
+  width: 11em;
+  height: 11em;
+  margin: 0 1em;
   padding: .5em;
-  flex-basis: 360px;
   background: #fefefe;
   box-shadow: 0 0 10px #d8d8d8;
+}
+body .card.loading {
+  color: #d8d8d8;
+  animation: none;
+  font-size: 1em;
+  min-width: 30em;
 }
 body .weather {
   animation: rotateHue 8s infinite linear;
@@ -194,11 +202,8 @@ body .weather .icon svg {
   width: 2em;
   height: 2em;
 }
-body .weather.loading {
-  color: #d8d8d8;
-  animation: none;
-  font-size: 1em;
-  min-width: 30em;
+body .mars img {
+  max-width: 100%;
 }
 
 /*# sourceMappingURL=main.css.map */

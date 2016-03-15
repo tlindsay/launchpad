@@ -61,6 +61,7 @@ this.getMars = function() {
   req.onload = function() {
     var response;
     response = JSON.parse(req.responseText);
+    $('.mars').removeClass('loading');
     return $('.mars .pic').html("<img src=\"" + response.photos[randomNum(response.photos.length)].img_src + "\" />");
   };
   return req.send();

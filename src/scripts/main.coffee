@@ -47,6 +47,7 @@ located = false
     true
   req.onload = () ->
     response = JSON.parse req.responseText
+    $('.mars').removeClass 'loading'
     $('.mars .pic').html "<img src=\"#{response.photos[randomNum response.photos.length].img_src}\" />"
   req.send()
 
