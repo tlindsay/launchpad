@@ -9,5 +9,6 @@ My own personal New Tab page.
 ## To Do
 - [ ] Make AJAX non-blocking
 - [ ] Make font load non-blocking
+- [ ] Get the damn `.sass-cache` out of the repo
 - [ ] Clean up all the things
 - [ ] Figure out what other cards I want to include
