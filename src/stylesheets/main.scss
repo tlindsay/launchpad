@@ -7,6 +7,9 @@ body {
   color:$lg;
   @include fantasque;
 
+  display:flex;
+  align-items: baseline;
+  justify-content: space-around;
   padding-top: 5em;
 
   div { 
@@ -19,6 +22,8 @@ body {
     max-width: 10em;
     margin: 0 auto;
     padding: .5em;
+
+    flex-basis: 360px;
 
     background: #fefefe;
     box-shadow: 0 0 10px $lg;

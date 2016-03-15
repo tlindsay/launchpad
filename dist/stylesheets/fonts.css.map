@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAQ,6DAAqD",
+"sources": ["../../src/stylesheets/fonts.scss"],
 "names": [],
 "file": "fonts.css"
 }

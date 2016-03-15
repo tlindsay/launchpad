@@ -3,7 +3,9 @@ apis =
     endpoint: "https://api.forecast.io/forecast"
     key: 'aaa93803cd15d3b0cc3eec06e0e20018'
   nasa:
-    endpoint: 'https://api.nasa.gov/planetary/apod'
+    endpoints:
+      apod: 'https://api.nasa.gov/planetary/apod'
+      mars: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos' 
     key: 'oi5Qw99OwyRKa43TPEquG2kbdKCd0eifOT5sA4uk'
 
 coords = {}
@@ -36,6 +38,17 @@ located = false
         available: info.availableCapacity / 10**9
         total: info.capacity / 10**9
       resolve mem
+
+@getMars = () ->
+  n = apis.nasa
+  req = new XMLHttpRequest()
+  req.open 'GET',
+    "#{n.endpoints.mars}?sol=#{randomNum 1200, 940}&camera=navcam&api_key=#{n.key}",
+    true
+  req.onload = () ->
+    response = JSON.parse req.responseText
+    $('.mars .pic').html "<img src=\"#{response.photos[randomNum response.photos.length].img_src}\" />"
+  req.send()
 
 getWeatherIcon = (icon) ->
   conditions = icon.split('-')
@@ -70,8 +83,12 @@ intersection = (a, b) ->
 intersect = (a, b) ->
   return intersection(a, b).length > 0
 
-@initWeather()
+randomNum = (max,min=0) ->
+  return Math.floor(Math.random() * (max - min) + min)
+
+@getWeather()
 
 @getMemory().then (result) ->
-  console.log 'got it!'
   console.log "#{result.available}/#{result.total}"
+
+  @getMars()

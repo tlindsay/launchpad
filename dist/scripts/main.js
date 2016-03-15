@@ -1,4 +1,4 @@
-var apis, coords, getWeatherIcon, intersect, intersection, located,
+var apis, coords, getWeatherIcon, intersect, intersection, located, randomNum,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 apis = {
@@ -7,7 +7,10 @@ apis = {
     key: 'aaa93803cd15d3b0cc3eec06e0e20018'
   },
   nasa: {
-    endpoint: 'https://api.nasa.gov/planetary/apod',
+    endpoints: {
+      apod: 'https://api.nasa.gov/planetary/apod',
+      mars: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
+    },
     key: 'oi5Qw99OwyRKa43TPEquG2kbdKCd0eifOT5sA4uk'
   }
 };
@@ -48,6 +51,19 @@ this.getMemory = function() {
       return resolve(mem);
     });
   });
+};
+
+this.getMars = function() {
+  var n, req;
+  n = apis.nasa;
+  req = new XMLHttpRequest();
+  req.open('GET', "" + n.endpoints.mars + "?sol=" + (randomNum(1200, 940)) + "&camera=navcam&api_key=" + n.key, true);
+  req.onload = function() {
+    var response;
+    response = JSON.parse(req.responseText);
+    return $('.mars .pic').html("<img src=\"" + response.photos[randomNum(response.photos.length)].img_src + "\" />");
+  };
+  return req.send();
 };
 
 getWeatherIcon = function(icon) {
@@ -110,9 +126,16 @@ intersect = function(a, b) {
   return intersection(a, b).length > 0;
 };
 
-this.initWeather();
+randomNum = function(max, min) {
+  if (min == null) {
+    min = 0;
+  }
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+this.getWeather();
 
 this.getMemory().then(function(result) {
-  console.log('got it!');
-  return console.log("" + result.available + "/" + result.total);
+  console.log("" + result.available + "/" + result.total);
+  return this.getMars();
 });
