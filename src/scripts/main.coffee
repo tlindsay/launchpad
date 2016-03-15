@@ -10,7 +10,7 @@ coords = {}
 located = false
 
 # Get dat weather
-@initWeather = () ->
+@getWeather = () ->
   console.info 'getting weather'
   navigator.geolocation.getCurrentPosition (p) ->
     f = apis.forecast
@@ -29,10 +29,13 @@ located = false
       $('.weather .icon').html getWeatherIcon(response.currently.icon)
     req.send()
 
-@initMemory = () ->
-  console.info 'getting available memory'
-  chrome.system.memory.getInfo (info) ->
-    console.log "#{info.availableCapacity / 10**9}/#{info.capacity / 10**9} available"
+@getMemory = () ->
+  return new Promise (resolve) ->
+    chrome.system.memory.getInfo (info) ->
+      mem = 
+        available: info.availableCapacity / 10**9
+        total: info.capacity / 10**9
+      resolve mem
 
 getWeatherIcon = (icon) ->
   conditions = icon.split('-')
@@ -62,16 +65,13 @@ getWeatherIcon = (icon) ->
 
 intersection = (a, b) ->
   [a, b] = [b, a] if a.length > b.length
-  value for vlue in a when value in b
+  value for value in a when value in b
+
+intersect = (a, b) ->
+  return intersection(a, b).length > 0
 
 @initWeather()
-@initMemory()
 
-theUltimateAnswer = () ->
-  new Promise (resolve) ->
-    setTimeout (() -> value = 42; resolve value), 3000
-
-promise = theUltimateAnswer()
-
-promise.then (result) ->
-  alert result
+@getMemory().then (result) ->
+  console.log 'got it!'
+  console.log "#{result.available}/#{result.total}"

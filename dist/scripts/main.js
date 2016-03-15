@@ -1,4 +1,4 @@
-var apis, coords, getWeatherIcon, intersection, located, promise, theUltimateAnswer,
+var apis, coords, getWeatherIcon, intersect, intersection, located,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 apis = {
@@ -16,7 +16,7 @@ coords = {};
 
 located = false;
 
-this.initWeather = function() {
+this.getWeather = function() {
   console.info('getting weather');
   return navigator.geolocation.getCurrentPosition(function(p) {
     var f, req;
@@ -37,10 +37,16 @@ this.initWeather = function() {
   });
 };
 
-this.initMemory = function() {
-  console.info('getting available memory');
-  return chrome.system.memory.getInfo(function(info) {
-    return console.log("" + (info.availableCapacity / Math.pow(10, 9)) + "/" + (info.capacity / Math.pow(10, 9)) + " available");
+this.getMemory = function() {
+  return new Promise(function(resolve) {
+    return chrome.system.memory.getInfo(function(info) {
+      var mem;
+      mem = {
+        available: info.availableCapacity / Math.pow(10, 9),
+        total: info.capacity / Math.pow(10, 9)
+      };
+      return resolve(mem);
+    });
   });
 };
 
@@ -86,13 +92,13 @@ getWeatherIcon = function(icon) {
 };
 
 intersection = function(a, b) {
-  var vlue, _i, _len, _ref, _results;
+  var value, _i, _len, _ref, _results;
   if (a.length > b.length) {
     _ref = [b, a], a = _ref[0], b = _ref[1];
   }
   _results = [];
   for (_i = 0, _len = a.length; _i < _len; _i++) {
-    vlue = a[_i];
+    value = a[_i];
     if (__indexOf.call(b, value) >= 0) {
       _results.push(value);
     }
@@ -100,22 +106,13 @@ intersection = function(a, b) {
   return _results;
 };
 
-this.initWeather();
-
-this.initMemory();
-
-theUltimateAnswer = function() {
-  return new Promise(function(resolve) {
-    return setTimeout((function() {
-      var value;
-      value = 42;
-      return resolve(value);
-    }), 3000);
-  });
+intersect = function(a, b) {
+  return intersection(a, b).length > 0;
 };
 
-promise = theUltimateAnswer();
+this.initWeather();
 
-promise.then(function(result) {
-  return alert(result);
+this.getMemory().then(function(result) {
+  console.log('got it!');
+  return console.log("" + result.available + "/" + result.total);
 });
