@@ -1,5 +1,6 @@
 # launchpad
 My own personal New Tab page.
+![screenshot](screenshot.jpg)
 
 ## Installation
 1. `$ git clone https://github.com/tlindsay/launchpad.git`
