@@ -192,6 +192,7 @@ body .card.loading {
   color: #d8d8d8;
   animation: none;
   font-size: 1em;
+  padding-top: 7em;
   min-width: 30em;
 }
 body .weather {

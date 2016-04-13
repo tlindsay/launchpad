@@ -1,5 +1,7 @@
-var apis, coords, getWeatherIcon, intersect, intersection, located, randomNum,
+var apis, coords, getWeatherIcon, intersect, intersection, located, randomNum, xr,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+xr = require('vendor/xr.js');
 
 apis = {
   forecast: {
@@ -137,6 +139,9 @@ randomNum = function(max, min) {
 this.getWeather();
 
 this.getMemory().then(function(result) {
-  console.log("" + result.available + "/" + result.total);
-  return this.getMars();
+  return console.log("" + result.available + "/" + result.total);
 });
+
+this.getMars();
+
+console.log(xr);

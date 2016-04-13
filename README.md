@@ -12,4 +12,5 @@ My own personal New Tab page.
 - [ ] Make font load non-blocking
 - [ ] Get the damn `.sass-cache` out of the repo
 - [ ] Clean up all the things
+- [ ] Handle NASA API failures
 - [ ] Figure out what other cards I want to include

@@ -1,3 +1,4 @@
+xr = require 'vendor/xr.js'
 apis =
   forecast:
     endpoint: "https://api.forecast.io/forecast"
@@ -92,4 +93,7 @@ randomNum = (max,min=0) ->
 @getMemory().then (result) ->
   console.log "#{result.available}/#{result.total}"
 
-  @getMars()
+@getMars()
+
+# XR check
+console.log xr
