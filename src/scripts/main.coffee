@@ -19,17 +19,16 @@ located = false
     coords = p.coords
     located = true
 
-    req = new XMLHttpRequest()
-    req.open 'GET',
-      "#{f.endpoint}/#{f.key}/#{coords.latitude},#{coords.longitude}",
-      true
-    req.onload = () ->
-      response = JSON.parse req.responseText
-      $('.weather').removeClass('loading')
-      $('.weather .summary').html response.currently.summary
-      $('.weather .temperature').html "#{~~response.currently.apparentTemperature}&deg;F"
-      $('.weather .icon').html getWeatherIcon(response.currently.icon)
-    req.send()
+    url = "#{f.endpoint}/#{f.key}/#{coords.latitude},#{coords.longitude}"
+    ajax url, {}, (err, res) ->
+      if err
+        $('.weather .summary').html 'Weather Failed'
+      else
+        $('.weather').removeClass 'loading'
+        $('.weather .summary').html res.currently.summary
+        $('.weather .temperature').html "#{~~res.currently.apparentTemperature}&deg;F"
+        getWeatherIcon(res.currently.icon).then (result) ->
+          $('.weather .icon').html result
 
 @getMemory = () ->
   return new Promise (resolve) ->
@@ -41,15 +40,13 @@ located = false
 
 @getMars = () ->
   n = apis.nasa
-  req = new XMLHttpRequest()
-  req.open 'GET',
-    "#{n.endpoints.mars}?sol=#{randomNum 1200, 940}&camera=navcam&api_key=#{n.key}",
-    true
-  req.onload = () ->
-    response = JSON.parse req.responseText
-    $('.mars').removeClass 'loading'
-    $('.mars .pic').html "<img src=\"#{response.photos[randomNum response.photos.length].img_src}\" />"
-  req.send()
+  url = "#{n.endpoints.mars}?sol=#{randomNum 1200, 940}&camera=navcam&api_key=#{n.key}"
+  ajax url, {}, (err, res) ->
+    if err
+      $('.mars .pic').text 'Mars Failed'
+    else
+      $('.mars').removeClass 'loading'
+      $('.mars .pic').html "<img src=\"#{res.photos[randomNum res.photos.length].img_src}\" />"
 
 getWeatherIcon = (icon) ->
   conditions = icon.split('-')
@@ -68,14 +65,15 @@ getWeatherIcon = (icon) ->
   uri.push('Alt') if intersect(['rain', 'hail', 'sleet', 'snow'], conditions)
 
   # Load the icon
-  req = new XMLHttpRequest()
-  req.open 'GET',
-    "assets/icons/weather/#{uri.join('-')}.svg",
-    false
-  req.onload = () -> svg = req.responseText
-  req.send()
-
-  return svg
+  url = "assets/icons/weather/#{uri.join('-')}.svg"
+  return new Promise (resolve, reject) ->
+    ajax url, {}, (err, res) =>
+      console.log res
+      console.log err
+      if err
+        reject()
+      else
+        resolve(res)
 
 intersection = (a, b) ->
   [a, b] = [b, a] if a.length > b.length

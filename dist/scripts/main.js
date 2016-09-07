@@ -22,21 +22,23 @@ located = false;
 this.getWeather = function() {
   console.info('getting weather');
   return navigator.geolocation.getCurrentPosition(function(p) {
-    var f, req;
+    var f, url;
     f = apis.forecast;
     coords = p.coords;
     located = true;
-    req = new XMLHttpRequest();
-    req.open('GET', "" + f.endpoint + "/" + f.key + "/" + coords.latitude + "," + coords.longitude, true);
-    req.onload = function() {
-      var response;
-      response = JSON.parse(req.responseText);
-      $('.weather').removeClass('loading');
-      $('.weather .summary').html(response.currently.summary);
-      $('.weather .temperature').html("" + (~~response.currently.apparentTemperature) + "&deg;F");
-      return $('.weather .icon').html(getWeatherIcon(response.currently.icon));
-    };
-    return req.send();
+    url = "" + f.endpoint + "/" + f.key + "/" + coords.latitude + "," + coords.longitude;
+    return ajax(url, {}, function(err, res) {
+      if (err) {
+        return $('.weather .summary').html('Weather Failed');
+      } else {
+        $('.weather').removeClass('loading');
+        $('.weather .summary').html(res.currently.summary);
+        $('.weather .temperature').html("" + (~~res.currently.apparentTemperature) + "&deg;F");
+        return getWeatherIcon(res.currently.icon).then(function(result) {
+          return $('.weather .icon').html(result);
+        });
+      }
+    });
   });
 };
 
@@ -54,21 +56,21 @@ this.getMemory = function() {
 };
 
 this.getMars = function() {
-  var n, req;
+  var n, url;
   n = apis.nasa;
-  req = new XMLHttpRequest();
-  req.open('GET', "" + n.endpoints.mars + "?sol=" + (randomNum(1200, 940)) + "&camera=navcam&api_key=" + n.key, true);
-  req.onload = function() {
-    var response;
-    response = JSON.parse(req.responseText);
-    $('.mars').removeClass('loading');
-    return $('.mars .pic').html("<img src=\"" + response.photos[randomNum(response.photos.length)].img_src + "\" />");
-  };
-  return req.send();
+  url = "" + n.endpoints.mars + "?sol=" + (randomNum(1200, 940)) + "&camera=navcam&api_key=" + n.key;
+  return ajax(url, {}, function(err, res) {
+    if (err) {
+      return $('.mars .pic').text('Mars Failed');
+    } else {
+      $('.mars').removeClass('loading');
+      return $('.mars .pic').html("<img src=\"" + res.photos[randomNum(res.photos.length)].img_src + "\" />");
+    }
+  });
 };
 
 getWeatherIcon = function(icon) {
-  var conditions, req, svg, uri;
+  var conditions, svg, uri, url;
   conditions = icon.split('-');
   uri = [];
   svg = '';
@@ -99,13 +101,20 @@ getWeatherIcon = function(icon) {
   if (intersect(['rain', 'hail', 'sleet', 'snow'], conditions)) {
     uri.push('Alt');
   }
-  req = new XMLHttpRequest();
-  req.open('GET', "assets/icons/weather/" + (uri.join('-')) + ".svg", false);
-  req.onload = function() {
-    return svg = req.responseText;
-  };
-  req.send();
-  return svg;
+  url = "assets/icons/weather/" + (uri.join('-')) + ".svg";
+  return new Promise(function(resolve, reject) {
+    return ajax(url, {}, (function(_this) {
+      return function(err, res) {
+        console.log(res);
+        console.log(err);
+        if (err) {
+          return reject();
+        } else {
+          return resolve(res);
+        }
+      };
+    })(this));
+  });
 };
 
 intersection = function(a, b) {
