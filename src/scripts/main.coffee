@@ -87,9 +87,11 @@ intersect = (a, b) ->
 randomNum = (max,min=0) ->
   return Math.floor(Math.random() * (max - min) + min)
 
-@getWeather()
+window.onload = () =>
+  window.$ = u
+  @getWeather()
 
-@getMemory().then (result) ->
-  console.log "#{result.available}/#{result.total}"
+  @getMemory().then (result) ->
+    console.log "#{result.available}/#{result.total}"
 
-@getMars()
+  @getMars()

@@ -134,10 +134,13 @@ randomNum = function(max, min) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-this.getWeather();
-
-this.getMemory().then(function(result) {
-  return console.log("" + result.available + "/" + result.total);
-});
-
-this.getMars();
+window.onload = (function(_this) {
+  return function() {
+    window.$ = u;
+    _this.getWeather();
+    _this.getMemory().then(function(result) {
+      return console.log("" + result.available + "/" + result.total);
+    });
+    return _this.getMars();
+  };
+})(this);
