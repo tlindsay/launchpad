@@ -1,4 +1,3 @@
-xr = require 'vendor/xr.js'
 apis =
   forecast:
     endpoint: "https://api.forecast.io/forecast"
@@ -6,7 +5,7 @@ apis =
   nasa:
     endpoints:
       apod: 'https://api.nasa.gov/planetary/apod'
-      mars: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos' 
+      mars: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
     key: 'oi5Qw99OwyRKa43TPEquG2kbdKCd0eifOT5sA4uk'
 
 coords = {}
@@ -35,7 +34,7 @@ located = false
 @getMemory = () ->
   return new Promise (resolve) ->
     chrome.system.memory.getInfo (info) ->
-      mem = 
+      mem =
         available: info.availableCapacity / 10**9
         total: info.capacity / 10**9
       resolve mem
@@ -94,6 +93,3 @@ randomNum = (max,min=0) ->
   console.log "#{result.available}/#{result.total}"
 
 @getMars()
-
-# XR check
-console.log xr
