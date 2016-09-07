@@ -67,7 +67,7 @@ getWeatherIcon = (icon) ->
   # Load the icon
   url = "assets/icons/weather/#{uri.join('-')}.svg"
   return new Promise (resolve, reject) ->
-    ajax url, {}, (err, res) =>
+    ajax url, {}, (err, res) ->
       console.log res
       console.log err
       if err

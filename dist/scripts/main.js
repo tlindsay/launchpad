@@ -103,17 +103,15 @@ getWeatherIcon = function(icon) {
   }
   url = "assets/icons/weather/" + (uri.join('-')) + ".svg";
   return new Promise(function(resolve, reject) {
-    return ajax(url, {}, (function(_this) {
-      return function(err, res) {
-        console.log(res);
-        console.log(err);
-        if (err) {
-          return reject();
-        } else {
-          return resolve(res);
-        }
-      };
-    })(this));
+    return ajax(url, {}, function(err, res) {
+      console.log(res);
+      console.log(err);
+      if (err) {
+        return reject();
+      } else {
+        return resolve(res);
+      }
+    });
   });
 };
 
