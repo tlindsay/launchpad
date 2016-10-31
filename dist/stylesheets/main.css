@@ -206,5 +206,14 @@ body .weather .icon svg {
 body .mars img {
   max-width: 100%;
 }
+body .credit {
+  bottom: 10px;
+  font-size: 10px;
+  left: 10px;
+  position: absolute;
+}
+body .credit a {
+  color: #a8a8a8;
+}
 
 /*# sourceMappingURL=main.css.map */

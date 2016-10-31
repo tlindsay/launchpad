@@ -51,4 +51,12 @@ body {
   .mars {
     img { max-width: 100%; }
   }
+
+  .credit {
+    bottom: 10px;
+    font-size: 10px;
+    left: 10px;
+    position: absolute;
+    a { color: #a8a8a8; }
+  }
 }

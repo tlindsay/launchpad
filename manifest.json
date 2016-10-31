@@ -1,6 +1,6 @@
 {
-  "name": "Pat's New Tab",
-  "description": "Override the new tab page",
+  "name": "Launchpad - New Tab page",
+  "description": "New Tab page featuring weather by Dark Sky and photos from the Curiosity rover on Mars!",
   "version": "0.1",
   "incognito": "split",
   "permissions":[
