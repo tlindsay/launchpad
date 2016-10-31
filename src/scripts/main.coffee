@@ -1,6 +1,6 @@
 apis =
   forecast:
-    endpoint: "https://api.forecast.io/forecast"
+    endpoint: "https://api.darksky.net/forecast"
     key: 'aaa93803cd15d3b0cc3eec06e0e20018'
   nasa:
     endpoints:
@@ -29,6 +29,8 @@ located = false
         $('.weather .temperature').html "#{~~res.currently.apparentTemperature}&deg;F"
         getWeatherIcon(res.currently.icon).then (result) ->
           $('.weather .icon').html result
+  , () ->
+    $('.weather .summary').html 'Geolocation Access Required'
 
 @getMemory = () ->
   return new Promise (resolve) ->

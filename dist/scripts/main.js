@@ -3,7 +3,7 @@ var apis, coords, getWeatherIcon, intersect, intersection, located, randomNum,
 
 apis = {
   forecast: {
-    endpoint: "https://api.forecast.io/forecast",
+    endpoint: "https://api.darksky.net/forecast",
     key: 'aaa93803cd15d3b0cc3eec06e0e20018'
   },
   nasa: {
@@ -39,6 +39,8 @@ this.getWeather = function() {
         });
       }
     });
+  }, function() {
+    return $('.weather .summary').html('Geolocation Access Required');
   });
 };
 
