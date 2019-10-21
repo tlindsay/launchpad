@@ -8,17 +8,14 @@ body {
   color:$lg;
   height: 100vh;
   width: 100vw;
+  align-items: center;
+  display:flex;
+  justify-content: space-around;
 
   @media(prefers-color-scheme: dark) {
     background: $black;
   }
 
-  #app {
-    align-items: center;
-    display:flex;
-    height: 100%;
-    justify-content: space-around;
-  }
 
   div {
     vertical-align: 50%;
@@ -27,7 +24,7 @@ body {
   }
 
   .card {
-    $size: 5em;
+    $size: 10em;
     width: $size;
     height: $size;
     padding: .5em;
