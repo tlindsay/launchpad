@@ -1,0 +1,62 @@
+@import 'fonts';
+@import 'variables';
+@import 'animations';
+
+#root {
+  background: $wh;
+  color:$lg;
+  @include fantasque;
+
+  display:flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  padding-top: 5em;
+
+  div {
+    vertical-align: 50%;
+    text-align: center;
+    font-size: 3em;
+  }
+
+  .card {
+    width: 11em;
+    height: 11em;
+    margin: 0 1em;
+    padding: .5em;
+
+    background: #fefefe;
+    box-shadow: 0 0 10px $lg;
+
+    &.loading {
+      color: $lg;
+      animation: none;
+      font-size: 1em;
+      padding-top:7em;
+      min-width: 30em;
+    }
+  }
+
+  .weather {
+    animation: rotateHue 8s infinite linear;
+
+    .icon svg {
+      animation: rotateFillHue 8s infinite linear;
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  .mars {
+    img { max-width: 100%; }
+  }
+
+  .credit {
+    bottom: 10px;
+    font-size: 10px;
+    left: 10px;
+    position: absolute;
+    a { color: #a8a8a8; }
+  }
+}
