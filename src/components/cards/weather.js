@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Card from '../card';
 import useGeolocation from '../../hooks/use-geolocation';
 
@@ -14,6 +15,11 @@ const Weather = ({ condition, temp, icon }) => (
     </div>
   </>
 );
+Weather.propTypes = {
+  condition: PropTypes.string,
+  temp: PropTypes.number,
+  icon: PropTypes.string
+};
 
 const WeatherCard = () => {
   const [isLoading, setLoading] = useState(true);
