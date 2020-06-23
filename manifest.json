@@ -1,16 +1,16 @@
 {
   "name": "Launchpad - New Tab page",
-  "description": "New Tab page featuring weather by Dark Sky and photos from the Curiosity rover on Mars!",
-  "version": "0.1",
+  "default_locale": "en",
+  "description": "New Tab page featuring weather by OpenWeatherMap and photos from the Curiosity rover on Mars!",
+  "icons": { "128": "icon.png" },
+  "version": "1.0",
   "incognito": "split",
   "permissions":[
     "geolocation",
-    "system.memory",
-    "https://api.darksky.net/*",
-    "https://cdn.jsdelivr.net/*"
+    "https://api.openweathermap.org/data/2.5/weather"
   ],
   "chrome_url_overrides": {
-    "newtab": "dist/new.html"
+    "newtab": "dist/index.html"
   },
   "manifest_version": 2
 }
