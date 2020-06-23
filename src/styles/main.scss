@@ -1,18 +1,24 @@
-@import 'fonts';
-@import 'variables';
-@import 'animations';
+@import './fonts';
+@import './variables';
+@import './animations';
 
+body {
+  height: 100vh;
+  margin: 0;
+  width: 100vw;
+}
 #root {
   background: $wh;
   color:$lg;
   @include fantasque;
 
-  display:flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: center;
   align-content: space-around;
-  padding-top: 5em;
+  align-items: flex-start;
+  display:flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 
   div {
     vertical-align: 50%;

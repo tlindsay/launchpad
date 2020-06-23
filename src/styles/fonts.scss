@@ -1,7 +1,7 @@
-@import url(https://fontlibrary.org/face/fantasque-sans-mono);
+@import '../assets/fonts/Fantasque/FantasqueSansMono-Regular-decl.css';
 
 @mixin fantasque {
-  font-family: 'FantasqueSansMonoRegular', sans-serif;
+  font-family: 'Fantasque Sans Mono', monospace;
   font-weight: normal;
   font-style: normal;
 }
