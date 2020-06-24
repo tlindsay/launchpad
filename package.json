@@ -16,12 +16,17 @@
     "@parcel/transformer-postcss": "^2.0.0-alpha.3",
     "babel-preset-nano-react-app": "^0.1.0",
     "eslint-plugin-react": "^7.20.0",
-    "parcel": "^2.0.0-alpha.3.2",
+    "parcel": "2.0.0-beta.1",
     "sass": "^1.26.9"
   },
   "babel": {
     "presets": [
       "nano-react-app"
     ]
+  },
+  "targets": {
+    "": {
+      "publicUrl": "./"
+    }
   }
 }
