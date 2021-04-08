@@ -1,6 +1,5 @@
 {
   "name": "Launchpad - New Tab page",
-  "default_locale": "en",
   "description": "New Tab page featuring weather by OpenWeatherMap and photos from the Curiosity rover on Mars!",
   "icons": { "128": "icon.png" },
   "version": "1.0",

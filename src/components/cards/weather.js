@@ -25,6 +25,7 @@ const WeatherCard = () => {
   const [isLoading, setLoading] = useState(true);
   const [weather, setWeather] = useState(null);
   const loc = useGeolocation();
+  console.info('Weather loading')
 
   const getWeather = async ({ latitude, longitude }) => {
     let params = [
@@ -44,7 +45,14 @@ const WeatherCard = () => {
   };
 
   useEffect(() => {
-    if (loc.latitude === null) return;
+    if (loc.error) {
+      console.log('Location error: ', loc.error);
+      return
+    }
+    if (loc.latitude === null) {
+      console.error('Location unavailable');
+      return;
+    }
     getWeather(loc);
   }, [loc]);
 
