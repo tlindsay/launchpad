@@ -6,7 +6,8 @@
   "incognito": "split",
   "permissions":[
     "geolocation",
-    "https://api.openweathermap.org/data/2.5/weather"
+    "https://api.openweathermap.org/data/2.5/weather",
+    "https://orbiter.thatdarnpat.com"
   ],
   "chrome_url_overrides": {
     "newtab": "dist/index.html"
