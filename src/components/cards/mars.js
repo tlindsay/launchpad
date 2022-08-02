@@ -10,7 +10,11 @@ const MarsCard = () => {
   const getMars = async () => {
     let resp = await fetch(ENDPOINT);
     let photo = await resp.json();
-    setMars({ src: photo.img_src, alt: photo.earth_date });
+    setMars({
+      alt: `A photo captured by the ${photo.rover.name} rover's ${photo.camera.full_name} on ${photo.earth_date}.`,
+      src: photo.img_src,
+      date: photo.earth_date
+    });
     setLoading(false);
   };
 
@@ -18,17 +22,18 @@ const MarsCard = () => {
     getMars();
   }, []);
 
-  return (
-    <Card className={`mars ${isLoading ? 'loading' : ''}`}>
-      {
-        isLoading ? 'Loading' :
-          <figure>
+  return isLoading
+    ? <Card className='mars loading'>Loading</Card>
+    : (
+      <Card className={'mars'}>
+        <figure>
+          <a href={mars.src}>
             <img src={mars.src} alt={mars.alt} />
-            <figcaption>{mars.alt}</figcaption>
-          </figure>
-      }
-    </Card>
-  );
+          </a>
+          <figcaption>{mars.date}</figcaption>
+        </figure>
+      </Card>
+    );
 };
 
 export default MarsCard;
